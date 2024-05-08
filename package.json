@@ -16,6 +16,9 @@
     "web",
     "expo"
   ],
+  "repository": "https://github.com/ripeworks/react-native-toasty",
+  "author": "Mike Kruk (https://ripeworks.com)",
+  "license": "MIT",
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
