@@ -1,9 +1,12 @@
 {
-  "name": "react-native-toasty",
+  "name": "react-native-dan-forden",
   "description": "Super simple react native toast that's just gonna work. (web, native, expo)",
   "version": "0.0.1",
   "main": "src/index.ts",
   "types": "src/types.d.ts",
+  "files": [
+    "src"
+  ],
   "keywords": [
     "react",
     "react-native",
