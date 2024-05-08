@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
   toast: {
     borderRadius: 6,
     gap: 4,
+    maxWidth: 672,
     paddingLeft: 48,
     paddingRight: 48,
     paddingTop: 16,
     paddingBottom: 16,
-    // shadow-sm
-    // max-w-2xl
+    // TODO shadow-sm
   },
   message: {
     fontWeight: "500",
