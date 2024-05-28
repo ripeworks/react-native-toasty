@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
 import {
   GestureHandlerRootView,
   TouchableOpacity,
@@ -38,7 +39,7 @@ export default function ToastContainer({ toast, dismiss, children }: Props) {
           <Animated.View
             entering={SlideInUp}
             exiting={SlideOutUp}
-            style={{ top: insets.top + 16, alignItems: "center" }}
+            style={[styles.container, { top: insets.top + 16 }]}
           >
             <TouchableOpacity onPress={onDismiss}>{children}</TouchableOpacity>
           </Animated.View>
@@ -47,3 +48,10 @@ export default function ToastContainer({ toast, dismiss, children }: Props) {
     </FullWindowOverlay>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    position: "absolute",
+  },
+});
