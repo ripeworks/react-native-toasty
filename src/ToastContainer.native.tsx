@@ -51,7 +51,9 @@ export default function ToastContainer({ toast, dismiss, children }: Props) {
 
 const styles = StyleSheet.create({
   container: {
+    ...StyleSheet.absoluteFillObject,
     alignItems: "center",
-    position: "absolute",
+    width: "100%",
+    zIndex: 10000,
   },
 });
