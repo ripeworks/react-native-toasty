@@ -1,7 +1,7 @@
 {
   "name": "react-native-dan-forden",
   "description": "Super simple react native toast that's just gonna work. (web, native, expo)",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "src/index.ts",
   "files": [
     "src"
