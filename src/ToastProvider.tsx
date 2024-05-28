@@ -54,6 +54,7 @@ export default function ToastProvider({
 
   return (
     <>
+      {children}
       {alerts.map((alert) => (
         <ToastContainer
           key={alert.id}
@@ -63,7 +64,6 @@ export default function ToastProvider({
           <ToastComponent {...alert} dismiss={() => dismiss(alert.id)} />
         </ToastContainer>
       ))}
-      {children}
     </>
   );
 }
