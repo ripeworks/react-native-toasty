@@ -23,7 +23,9 @@ function PlatformOverlay({ children }: { children: React.ReactNode }) {
   if (Platform.OS === "ios") {
     return (
       <FullWindowOverlay>
-        <GestureHandlerRootView>{children}</GestureHandlerRootView>
+        <GestureHandlerRootView pointerEvents="box-none">
+          {children}
+        </GestureHandlerRootView>
       </FullWindowOverlay>
     );
   }
