@@ -5,11 +5,17 @@ import { ToastMessage } from "./types";
 
 type Props = {
   children: React.ReactNode;
+  position: "top" | "bottom";
   toast: ToastMessage;
   dismiss: () => void;
 };
 
-export default function ToastContainer({ toast, dismiss, children }: Props) {
+export default function ToastContainer({
+  toast,
+  position,
+  dismiss,
+  children,
+}: Props) {
   const [slide, setSlide] = useState(false);
 
   function onDismiss() {
@@ -29,10 +35,29 @@ export default function ToastContainer({ toast, dismiss, children }: Props) {
   }, []);
 
   return (
-    <View pointerEvents="none" style={styles.container}>
+    <View
+      pointerEvents="none"
+      style={[styles.container, position === "bottom" && styles.positionBottom]}
+    >
       <Pressable
         pointerEvents="auto"
-        style={[styles.pressable, slide && styles.pressableIn]}
+        style={[
+          styles.pressable,
+          // @ts-ignore
+          {
+            transform: [
+              {
+                translateY: slide
+                  ? position === "top"
+                    ? 16
+                    : -16
+                  : position === "top"
+                  ? "-100%"
+                  : "100%",
+              },
+            ],
+          },
+        ]}
         onPress={onDismiss}
       >
         {children}
@@ -50,19 +75,13 @@ const styles = StyleSheet.create({
     width: "100%",
     zIndex: 10000,
   },
+  positionBottom: {
+    justifyContent: "flex-end",
+  },
   pressable: {
     // @ts-ignore
     transitionProperty: "transform",
     transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
     transitionDuration: "150ms",
-    transform: [
-      {
-        // @ts-ignore
-        translateY: "-100%",
-      },
-    ],
-  },
-  pressableIn: {
-    transform: [{ translateY: 16 }],
   },
 });

@@ -11,11 +11,13 @@ let showToast = (params: ToastParams) => {
 
 type Props = {
   children: React.ReactNode;
+  position?: "top" | "bottom";
   ToastComponent?: React.ElementType<ToastProps>;
 };
 
 export default function ToastProvider({
   children,
+  position = "top",
   ToastComponent = Toast,
 }: Props) {
   const [alerts, setAlerts] = useState<ToastMessage[]>([]);
@@ -58,6 +60,7 @@ export default function ToastProvider({
       {alerts.map((alert) => (
         <ToastContainer
           key={alert.id}
+          position={position}
           toast={alert}
           dismiss={() => dismiss(alert.id)}
         >

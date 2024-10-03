@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Animated, { SlideInUp, SlideOutUp } from "react-native-reanimated";
+import Animated, {
+  SlideInDown,
+  SlideInUp,
+  SlideOutUp,
+  SlideOutDown,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FullWindowOverlay } from "react-native-screens";
 
@@ -9,6 +14,7 @@ import { ToastMessage } from "./types";
 
 type Props = {
   children: React.ReactNode;
+  position: "top" | "bottom";
   toast: ToastMessage;
   dismiss: () => void;
 };
@@ -25,7 +31,12 @@ function PlatformOverlay({ children }: { children: React.ReactNode }) {
   return <View style={styles.overlayContainer}>{children}</View>;
 }
 
-export default function ToastContainer({ toast, dismiss, children }: Props) {
+export default function ToastContainer({
+  toast,
+  position,
+  dismiss,
+  children,
+}: Props) {
   const insets = useSafeAreaInsets();
   const [visible, setVisible] = useState(true);
 
@@ -45,9 +56,14 @@ export default function ToastContainer({ toast, dismiss, children }: Props) {
     <PlatformOverlay>
       {visible && (
         <Animated.View
-          entering={SlideInUp}
-          exiting={SlideOutUp}
-          style={[styles.container, { top: insets.top + 16 }]}
+          entering={position === "top" ? SlideInUp : SlideInDown}
+          exiting={position === "top" ? SlideOutUp : SlideOutDown}
+          style={[
+            styles.container,
+            position === "top"
+              ? { top: insets.top + 16 }
+              : { bottom: insets.bottom + 16 },
+          ]}
         >
           <TouchableOpacity onPress={onDismiss}>{children}</TouchableOpacity>
         </Animated.View>
@@ -59,7 +75,6 @@ export default function ToastContainer({ toast, dismiss, children }: Props) {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    top: 0,
     left: 0,
     right: 0,
     alignItems: "center",
