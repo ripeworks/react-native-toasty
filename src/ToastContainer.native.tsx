@@ -30,7 +30,11 @@ function PlatformOverlay({ children }: { children: React.ReactNode }) {
     );
   }
 
-  return <View style={styles.overlayContainer}>{children}</View>;
+  return (
+    <View pointerEvents="box-none" style={styles.overlayContainer}>
+      {children}
+    </View>
+  );
 }
 
 export default function ToastContainer({
@@ -88,6 +92,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
+    bottom: 0,
     width: "100%",
     zIndex: 10000,
   },
